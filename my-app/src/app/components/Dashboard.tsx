@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import NewItem from './NewItem ';
 import Alert from './Alert';
 import { getNews } from '../api/getNews';
