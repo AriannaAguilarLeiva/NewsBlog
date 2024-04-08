@@ -1,14 +1,16 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import NewItem from "./NewItem ";
+import NewItem from './NewItem ';
 import axios from "axios";
 
 const Dashboard = () => {
   const [news, setNews] = useState([]);
-  useEffect(() => {    
+  const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://newsapi.org/v2/everything?q=bitcoin&apiKey=7592a43d7ab34ad4ab9ba5169e9b1399",{
+        const response = await axios.get("https://newsapi.org/v2/everything?q=bitcoin&apiKey=7592a43d7ab34ad4ab9ba5169e9b1399", {
           params: {
             pageSize: 12,
           },
@@ -19,6 +21,19 @@ const Dashboard = () => {
       }
     };
     fetchNews();
+
+    const alertTimeout = setTimeout(() => {
+      setShowAlert(true);
+    }, 5000);
+
+    const hideAlertTimeout = setTimeout(() => {
+      setShowAlert(false);
+    }, 20000);
+
+    return () => {
+      clearTimeout(alertTimeout);
+      clearTimeout(hideAlertTimeout);
+    };
   }, []);
 
   return (
@@ -28,10 +43,15 @@ const Dashboard = () => {
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Las últimas 12 noticias</h1>
           <p className="lg:w-1/2 w-full leading-relaxed text-opacity-80">Las mejores noticias en Costa Rica</p>
         </div>
+        {showAlert && (
+          <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span className="font-medium">Success alert!</span> Change a few things up and try submitting again.
+          </div>
+        )}
         <div className="flex flex-wrap -mx-4">
           {news.map((article: any, index: number) => (
             <div key={index} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 px-4 mb-8">
-              <NewItem author={article.author} title={article.title}/>
+              <NewItem author={article.author} title={article.title} />
             </div>
           ))}
         </div>
@@ -39,7 +59,6 @@ const Dashboard = () => {
       </div>
     </section>
   );
-  
 };
 
 export default Dashboard;
