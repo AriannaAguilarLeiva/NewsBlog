@@ -1,29 +1,28 @@
-// Dashboard.jsx
-import React from 'react';
-import NewItem from './NewItem ';
+import React from "react";
+import NewItem from "./NewItem ";
 
-interface DashboardProps {
-  items: Array<{ id: number; title: string; description: string }>;
-}
-
-const Dashboard: React.FC<DashboardProps> = ({ items }) => {
+const Dashboard = () => {
   return (
     <section className="text-gray-400 body-font bg-gray-900">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Pitchfork Kickstarter Taxidermy</h1>
-          <p className="lg:w-1/2 w-full leading-relaxed text-opacity-80">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table.</p>
+          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Las últimas 12 noticias</h1>
+          <p className="lg:w-1/2 w-full leading-relaxed text-opacity-80">Las mejores noticias en Costa Rica</p>
         </div>
-        <div className="flex flex-wrap -m-4">
-          {items.map(item => (
-            <div key={item.id} className="xl:w-1/3 md:w-1/2 p-4">
-              <NewItem title={item.title} description={item.description} />
-            </div>
-          ))}
+        <div className="flex flex-wrap -m-4"> 
+          
+          <NewItem title="Título 1" content="Contenido 1"/>
+          <NewItem title="Título 2" content="Contenido 2"/>
+          <NewItem title="Título 3" content="Contenido 3"/>
+          <NewItem title="Título 4" content="Contenido 4"/>
+          <NewItem title="Título 5" content="Contenido 5"/>
+          <NewItem title="Título 6" content="Contenido 6"/>
+
         </div>
         <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
       </div>
     </section>
+
   );
 };
 

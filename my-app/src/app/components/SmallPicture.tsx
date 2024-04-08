@@ -1,7 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const SmallPicture: React.FC = () => {
-  return <img src="small_picture.jpg" alt="Small Picture" className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-indigo-400 mb-4" />;
+const SmallPicture = () => {
+  return (
+    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-6 h-6" viewBox="0 0 24 24">
+      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+      <circle cx="12" cy="7" r="4"></circle>
+    </svg>
+  );
 };
 
 export default SmallPicture;
