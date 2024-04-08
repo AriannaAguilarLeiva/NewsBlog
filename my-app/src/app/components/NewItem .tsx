@@ -2,11 +2,11 @@ import React from "react";
 import SmallPicture from "./SmallPicture";
 
 interface NewItemProps{
+  author: string;
   title: string;
-  content: string;
 }
 
-const NewItem: React.FC<NewItemProps> = ({title, content}) => {
+const NewItem: React.FC<NewItemProps> = ({author, title}) => {
   return (
     <div className="xl:w-1/3 md:w-1/2 p-4">
       <div className="border border-gray-700 border-opacity-75 p-6 rounded-lg">
@@ -15,8 +15,8 @@ const NewItem: React.FC<NewItemProps> = ({title, content}) => {
         <SmallPicture></SmallPicture>
 
         </div>
-        <h2 className="text-lg text-white font-medium title-font mb-2">{title}</h2>
-        <p className="leading-relaxed text-base">{content}</p>
+        <h2 className="text-lg text-white font-medium title-font mb-2">{author}</h2>
+        <p className="leading-relaxed text-base">{title}</p>
       </div>
     </div>
   );
