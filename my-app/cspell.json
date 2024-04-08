@@ -1,0 +1,9 @@
+{
+    "version": "0.1",
+    "language": "en, es",
+    "ignorePaths": [
+        "node_modules"
+    ],
+    "words": [],
+    "ignoreWords": []
+}
