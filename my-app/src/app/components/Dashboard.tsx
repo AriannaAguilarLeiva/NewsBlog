@@ -1,39 +1,32 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import NewItem from './NewItem ';
-import axios from "axios";
-
+import Alert from './Alert';
+import { getNews } from '../api/getNews';
 const Dashboard = () => {
   const [news, setNews] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get("https://newsapi.org/v2/everything?q=bitcoin&apiKey=7592a43d7ab34ad4ab9ba5169e9b1399", {
-          params: {
-            pageSize: 12,
-          },
-        });
-        setNews(response.data.articles);
-      } catch (error) {
-        console.error(error);
-      }
+    const fetchData = async () => {
+      const newsData = await getNews();
+      setNews(newsData);
+
+      const alertTimeout = setTimeout(() => {
+        setShowAlert(true);
+      }, 5000);
+
+      const hideAlertTimeout = setTimeout(() => {
+        setShowAlert(false);
+      }, 20000);
+
+      return () => {
+        clearTimeout(alertTimeout);
+        clearTimeout(hideAlertTimeout);
+      };
     };
-    fetchNews();
 
-    const alertTimeout = setTimeout(() => {
-      setShowAlert(true);
-    }, 5000);
-
-    const hideAlertTimeout = setTimeout(() => {
-      setShowAlert(false);
-    }, 20000);
-
-    return () => {
-      clearTimeout(alertTimeout);
-      clearTimeout(hideAlertTimeout);
-    };
+    fetchData();
   }, []);
 
   return (
@@ -44,9 +37,7 @@ const Dashboard = () => {
           <p className="lg:w-1/2 w-full leading-relaxed text-opacity-80">Las mejores noticias en Costa Rica</p>
         </div>
         {showAlert && (
-          <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <span className="font-medium">Success alert!</span> Change a few things up and try submitting again.
-          </div>
+          <Alert></Alert>
         )}
         <div className="flex flex-wrap -mx-4">
           {news.map((article: any, index: number) => (
