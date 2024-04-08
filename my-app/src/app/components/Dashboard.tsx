@@ -51,7 +51,7 @@ const Dashboard = () => {
         <div className="flex flex-wrap -mx-4">
           {news.map((article: any, index: number) => (
             <div key={index} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 px-4 mb-8">
-              <NewItem author={article.author} title={article.title} />
+              <NewItem author={article.author} title={article.title} urlToImage={article.urlToImage}/>
             </div>
           ))}
         </div>
